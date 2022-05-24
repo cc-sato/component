@@ -13,4 +13,4 @@ jobs:
         with:
           repository: cc-sato/base
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          event-type: update-pkgs
+          event-type: update-packages
