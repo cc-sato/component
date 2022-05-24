@@ -12,5 +12,5 @@ jobs:
         uses: peter-evans/repository-dispatch@v1
         with:
           repository: cc-sato/component
-          token: ${{ secrets.GITHUB_PERSONAL_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           event-type: update-pkgs
