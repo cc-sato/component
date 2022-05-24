@@ -11,6 +11,6 @@ jobs:
       - name: dispatch update-packages
         uses: peter-evans/repository-dispatch@v1
         with:
-          repository: cc-sato/component
+          repository: cc-sato/base
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           event-type: update-pkgs
