@@ -14,17 +14,9 @@ jobs:
           echo ${{ github.workflow }}
           echo ${{ github.ref }}
           echo ${{ github.sha }}
-      - name: Set var of request header
-        run: |
-          echo ::set-env name=REQUEST_HEADER::"'"Accept:application/vnd.github.everest-preview+json"'"
-
-      - name: Set var of request body
-        run: |
-          echo ::set-env name=REQUEST_BODY::'{"event_type": "release", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'", "latesCommitSHA": ${{ github.sha }} }}'
-
       - name: Repository dispatch
         run: |
           curl -X POST https://api.github.com/repos/operation-check-for-GHorganization/frontend/dispatches \
-          -H $REQUEST_HEADER \
+          -H "Accept: application/vnd.github.v3+json" \
           -u ${{ secrets.REPO_ACCESS_TOKEN }} \
-          --data "$REQUEST_BODY"
+          -d '{"event_type":"on-demand-test","client_payload":{"unit":false,"integration":true}}'
