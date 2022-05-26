@@ -3,12 +3,18 @@ on:
   push:
     branches:
       - master
+      - feature/commit-hash
 jobs:
   release:
-    name: Setup
+    name: dispatch Update-frontend-component workflow on frontend repo
     runs-on: ubuntu-latest
     steps:
-      - name: dispatch Update-frontend-component workflow on frontend repo
+      - name: Show github properties
+        run: |
+          echo ${{ github.workflow }}
+          echo ${{ github.ref }}
+          echo ${{ github.sha }}
+      - name: dispatch
         uses: peter-evans/repository-dispatch@v1
         with:
           repository: operation-check-for-GHorganization/frontend
