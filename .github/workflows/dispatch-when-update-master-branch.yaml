@@ -9,14 +9,9 @@ jobs:
     name: dispatch Update-frontend-component workflow on frontend repo
     runs-on: ubuntu-latest
     steps:
-      - name: Show github properties
-        run: |
-          echo ${{ github.workflow }}
-          echo ${{ github.ref }}
-          echo ${{ github.sha }}
       - name: Repository dispatch
         run: |
           curl -X POST https://api.github.com/repos/operation-check-for-GHorganization/frontend/dispatches \
           -H "Accept: application/vnd.github.v3+json" \
           -u ${{ secrets.REPO_ACCESS_TOKEN }} \
-          -d '{"event_type":"on-demand-test","client_payload":{"unit":false,"integration":true}}'
+          -d '{"event_type":"update-frontend-component"}'
