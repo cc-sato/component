@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - feature/commit-hash
+permissions: write-all
 jobs:
   release:
     name: dispatch Update-frontend-component workflow on frontend repo
@@ -13,5 +14,5 @@ jobs:
         run: |
           curl -X POST https://api.github.com/repos/operation-check-for-GHorganization/frontend/dispatches \
           -H "Accept: application/vnd.github.v3+json" \
-          -u ${{ secrets.REPO_ACCESS_TOKEN }} \
+          -u ${{ secrets.GITHUB_TOKEN }} \
           -d '{"event_type":"update-frontend-component"}'
