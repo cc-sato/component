@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Repository dispatch
         run: |
-          curl -X POST https://api.github.com/repos/operation-check-for-GHorganization/frontend/dispatches \
+          curl -H "Authorization: token ${{ secrets.APP_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json" \
-          -u ${{ secrets.APP_TOKEN }} \
+          -X POST https://api.github.com/repos/operation-check-for-GHorganization/frontend/dispatches \
           -d '{"event_type":"update-frontend-component"}'
