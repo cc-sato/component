@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master
-      - feature/add-repository-dispatch
+      - feature/commit-hash
 jobs:
   release:
     name: dispatch Update-frontend-component workflow on frontend repo
