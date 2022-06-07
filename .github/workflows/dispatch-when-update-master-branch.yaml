@@ -4,6 +4,8 @@ on:
     branches:
       - master
       - feature/commit-hash
+permissions:
+  repository-projects: write
 jobs:
   release:
     name: dispatch Update-frontend-component workflow on frontend repo
