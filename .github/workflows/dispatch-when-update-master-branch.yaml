@@ -10,9 +10,19 @@ jobs:
     name: dispatch Update-frontend-component workflow on frontend repo
     runs-on: ubuntu-latest
     steps:
+      - name: Generate github token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: use token
+        run: echo "$GITHUB_TOKEN"
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
       - name: Repository dispatch
         run: |
-          curl -H "Authorization: token ${{ secrets.APP_TOKEN }}" \
+          curl -H "Authorization: token ${{ steps.generate_token.outputs.token }}" \
           -H "Accept: application/vnd.github.v3+json" \
           -X POST https://api.github.com/repos/operation-check-for-GHorganization/frontend/dispatches \
           -d '{"event_type":"update-frontend-component"}'
