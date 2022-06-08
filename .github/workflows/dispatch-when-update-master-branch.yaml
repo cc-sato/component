@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - feature/commit-hash
+      - feature/pacakge-registry
 permissions: write-all
 jobs:
   release:
