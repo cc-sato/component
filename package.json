@@ -1,5 +1,5 @@
 {
-  "name": "component",
+  "name": "@operation-check-for-GHorganization/component",
   "version": "1.0.2",
   "description": "",
   "main": "index.js",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/cc-sato/component/issues"
   },
-  "homepage": "https://github.com/cc-sato/component#readme"
+  "homepage": "https://github.com/cc-sato/component#readme",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
