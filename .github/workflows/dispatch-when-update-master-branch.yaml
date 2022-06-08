@@ -24,8 +24,6 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
       - name: install
         run: npm install
-      - name: build
-        run: npm run build
       # まだpublishされていないバージョンならpublishする
       - name: publish
         run: |
