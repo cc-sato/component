@@ -13,9 +13,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cc-sato/component/issues"
+    "url": "https://github.com/operation-check-for-GHorganization/component/issues"
   },
-  "homepage": "https://github.com/cc-sato/component#readme",
+  "homepage": "https://github.com/operation-check-for-GHorganization/component#readme",
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com/"
