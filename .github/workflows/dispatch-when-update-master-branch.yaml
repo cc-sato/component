@@ -7,6 +7,22 @@ on:
       - feature/pacakge-registry
 permissions: write-all
 jobs:
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
   release:
     name: dispatch Update-frontend-component workflow on frontend repo
     runs-on: ubuntu-latest
@@ -17,31 +33,6 @@ jobs:
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
-      - name: setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-          registry-url: 'https://npm.pkg.github.com'
-      - name: install
-        run: npm install
-      # まだpublishされていないバージョンならpublishする
-      - name: publish
-        run: |
-          npx can-npm-publish --verbose && npm publish || echo "Does not publish"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # まだtagがないバージョンなら、Git Tagをpushする
-      - name: package-version-to-git-tag
-        uses: pkgdeps/action-package-version-to-git-tag@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_repo: ${{ github.repository }}
-          git_commit_sha: ${{ github.sha }}
-          git_tag_prefix: "v"
-      - name: use token
-        run: echo "$GITHUB_TOKEN"
-        env:
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
       - name: Repository dispatch
         run: |
           curl -H "Authorization: token ${{ steps.generate_token.outputs.token }}" \
