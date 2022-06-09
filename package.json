@@ -1,6 +1,6 @@
 {
-  "name": "component",
-  "version": "1.0.2",
+  "name": "@operation-check-for-GHorganization/component",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,12 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cc-sato/component.git"
+    "url": "git+https://github.com/operation-check-for-GHorganization/component.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cc-sato/component/issues"
+    "url": "https://github.com/operation-check-for-GHorganization/component/issues"
   },
-  "homepage": "https://github.com/cc-sato/component#readme"
+  "homepage": "https://github.com/operation-check-for-GHorganization/component#readme",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
+  }
 }

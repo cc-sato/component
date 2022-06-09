@@ -1,0 +1,40 @@
+name: dispatch-when-update-master-branch
+on:
+  push:
+    branches:
+      - master
+      - feature/commit-hash
+      - feature/pacakge-registry
+permissions: write-all
+jobs:
+  publish-gpr:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  release:
+    name: dispatch Update-frontend-component workflow on frontend repo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate github token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: Repository dispatch
+        run: |
+          curl -H "Authorization: token ${{ steps.generate_token.outputs.token }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -X POST https://api.github.com/repos/operation-check-for-GHorganization/frontend/dispatches \
+          -d '{"event_type":"update-frontend-component"}'
